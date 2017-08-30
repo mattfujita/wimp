@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.libertymutual.goforcode.wimp.models.Actor;
 import com.libertymutual.goforcode.wimp.models.Movie;
+import com.libertymutual.goforcode.wimp.services.ActorRepository;
 import com.libertymutual.goforcode.wimp.services.MovieRepository;
 
 @RestController
@@ -20,12 +22,18 @@ import com.libertymutual.goforcode.wimp.services.MovieRepository;
 public class MovieApiController {
 	
 	private MovieRepository movieRepo;
+	private ActorRepository actorRepo;
 	
-	public MovieApiController(MovieRepository movieRepo) {
+	public MovieApiController(MovieRepository movieRepo, ActorRepository actorRepo) {
 		this.movieRepo = movieRepo;
+		this.actorRepo = actorRepo;
 		
 		movieRepo.save(new Movie("Mad Max", "Village Roadshow Pictures"));
 		movieRepo.save(new Movie("Guardians of the Galaxy", "Walt Disney Studios"));
+		
+		Movie movie = new Movie("Jurassic Park", "WB");
+		movie.setActors(actorRepo.findAll());
+		movieRepo.save(movie);
 		
 	}
 	
@@ -46,6 +54,18 @@ public class MovieApiController {
 	@PostMapping("")
 	public Movie create(@RequestBody Movie movie) {
 		return movieRepo.save(movie);
+	}
+	
+	@PostMapping("{movieId}/actors")
+	public Movie associateAnActor(@RequestBody Actor actor, @PathVariable long movieId) {
+		
+		Movie movie = movieRepo.findOne(movieId);
+		actor = actorRepo.findOne(actor.getId());
+		
+		movie.addActor(actor);
+		movieRepo.save(movie);
+
+		return movie;
 	}
 	
 	@DeleteMapping("{id}")
