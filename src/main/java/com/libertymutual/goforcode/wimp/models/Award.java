@@ -76,6 +76,14 @@ public class Award {
 
 	public void setYear(Long year) {
 		this.year = year;
+	}
+
+	public Actor getActor() {
+		return actor;
+	}
+
+	public void setActor(Actor actor) {
+		this.actor = actor;
 	}	
 
 }
