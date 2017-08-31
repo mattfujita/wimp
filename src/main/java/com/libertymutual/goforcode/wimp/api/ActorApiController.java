@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.libertymutual.goforcode.wimp.models.Actor;
 import com.libertymutual.goforcode.wimp.models.ActorWithMovies;
+import com.libertymutual.goforcode.wimp.models.Award;
 import com.libertymutual.goforcode.wimp.services.ActorRepository;
+import com.libertymutual.goforcode.wimp.services.AwardRepository;
 import com.libertymutual.goforcode.wimp.services.MovieRepository;
 
 @RestController
@@ -23,15 +25,19 @@ public class ActorApiController {
 	
 	private ActorRepository actorRepo;
 	private MovieRepository movieRepo;
+	private AwardRepository awardRepo;
 	
-	public ActorApiController(ActorRepository actorRepo, MovieRepository movieRepo) {
+	public ActorApiController(ActorRepository actorRepo, MovieRepository movieRepo, AwardRepository awardRepo) {
 		this.actorRepo = actorRepo;
 		this.movieRepo = movieRepo;
+		this.awardRepo = awardRepo;
 		
 		actorRepo.save(new Actor("Tom", "Hardy"));
 		actorRepo.save(new Actor("Gal", "Gadot"));
 		actorRepo.save(new Actor("Emma", "Watson"));
 		actorRepo.save(new Actor("Anna", "Kendrick"));
+		
+		awardRepo.save(new Award("Best Actor", "Oscar"));
 
 	}
 	
@@ -63,6 +69,20 @@ public class ActorApiController {
 		return actorRepo.save(actor);
 	}
 	
+	@PostMapping("{actorId}/awards")
+	public Actor associateAwardToActor(@PathVariable long actorId, @RequestBody Award award) {
+		Actor actor = actorRepo.findOne(actorId);
+		Award newAward = new Award(award.getTitle(), award.getOrganization(), award.getYear());
+		awardRepo.save(newAward);
+		
+		actor.addAward(newAward);
+		actorRepo.save(actor);
+		
+		return actor;
+		
+	}
+	
+	
 	@PutMapping("{id}")
 	public Actor update(@RequestBody Actor actor, @PathVariable long id) {
 		actor.setId(id);
@@ -81,3 +101,4 @@ public class ActorApiController {
 	}
 
 }
+
