@@ -33,13 +33,6 @@ public class MovieApiController {
 		this.movieRepo = movieRepo;
 		this.actorRepo = actorRepo;
 		
-		movieRepo.save(new Movie("Mad Max", "Village Roadshow Pictures"));
-		movieRepo.save(new Movie("Guardians of the Galaxy", "Walt Disney Studios"));
-		
-		Movie movie = new Movie("Jurassic Park", "WB");
-		movie.setActors(actorRepo.findAll());
-		movieRepo.save(movie);
-		
 	}
 	
 	@GetMapping("")

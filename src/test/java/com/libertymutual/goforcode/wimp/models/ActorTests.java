@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.meanbean.test.BeanTester;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 public class ActorTests {
@@ -20,6 +21,20 @@ public class ActorTests {
 	@Before
 	public void setUp() {
 		actor = new Actor();
+	}
+	
+	@Test
+	public void test_all_getters_and_setters() {
+		new BeanTester().testBean(Actor.class);
+	}
+	
+	@Test
+	public void test_actor_constructor() {
+		Actor actor = new Actor("Chris", "Hemsworth");
+		
+		assertThat(actor.getFirstName()).isEqualTo("Chris");
+		assertThat(actor.getLastName()).isEqualTo("Hemsworth");
+		
 	}
 
 	@Test

@@ -29,15 +29,7 @@ public class ActorApiController {
 	
 	public ActorApiController(ActorRepository actorRepo, AwardRepository awardRepo) {
 		this.actorRepo = actorRepo;
-//		this.movieRepo = movieRepo;
 		this.awardRepo = awardRepo;
-		
-//		actorRepo.save(new Actor("Tom", "Hardy"));
-//		actorRepo.save(new Actor("Gal", "Gadot"));
-//		actorRepo.save(new Actor("Emma", "Watson"));
-//		actorRepo.save(new Actor("Anna", "Kendrick"));
-		
-//		awardRepo.save(new Award("Best Actor", "Oscar"));
 
 	}
 	
@@ -52,13 +44,6 @@ public class ActorApiController {
 		if(actor == null) {
 			throw new StuffNotFoundException();
 		}
-//		ActorWithMovies newActor = new ActorWithMovies();
-//		newActor.setActiveSinceYear(actor.getActiveSinceYear());
-//		newActor.getBirthDate();
-//		newActor.setFirstName(actor.getFirstName());
-//		newActor.setLastName(actor.getLastName());
-//		newActor.setMovies(actor.getMovies());
-//		return newActor;
 		
 		return actor;
 	}

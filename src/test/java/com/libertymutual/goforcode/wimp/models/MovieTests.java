@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-
+import org.meanbean.test.BeanTester;
 import org.junit.Test;
 
 public class MovieTests {
@@ -22,6 +22,19 @@ public class MovieTests {
 	public void setUp() {
 		movie = new Movie();
 		movies = new ArrayList<Movie>();
+	}
+	
+	@Test
+	public void test_movie_constructor() {
+		Movie movie = new Movie("Moana", "Disney");
+		
+		assertThat(movie.getTitle()).isEqualTo("Moana");
+		assertThat(movie.getDistributor()).isEqualTo("Disney");
+	}
+	
+	@Test
+	public void test_all_getters_and_setters() {
+		new BeanTester().testBean(Movie.class);
 	}
 
 	@Test
