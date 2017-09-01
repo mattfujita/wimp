@@ -27,17 +27,17 @@ public class ActorApiController {
 	private MovieRepository movieRepo;
 	private AwardRepository awardRepo;
 	
-	public ActorApiController(ActorRepository actorRepo, MovieRepository movieRepo, AwardRepository awardRepo) {
+	public ActorApiController(ActorRepository actorRepo, AwardRepository awardRepo) {
 		this.actorRepo = actorRepo;
-		this.movieRepo = movieRepo;
+//		this.movieRepo = movieRepo;
 		this.awardRepo = awardRepo;
 		
-		actorRepo.save(new Actor("Tom", "Hardy"));
-		actorRepo.save(new Actor("Gal", "Gadot"));
-		actorRepo.save(new Actor("Emma", "Watson"));
-		actorRepo.save(new Actor("Anna", "Kendrick"));
+//		actorRepo.save(new Actor("Tom", "Hardy"));
+//		actorRepo.save(new Actor("Gal", "Gadot"));
+//		actorRepo.save(new Actor("Emma", "Watson"));
+//		actorRepo.save(new Actor("Anna", "Kendrick"));
 		
-		awardRepo.save(new Award("Best Actor", "Oscar"));
+//		awardRepo.save(new Award("Best Actor", "Oscar"));
 
 	}
 	

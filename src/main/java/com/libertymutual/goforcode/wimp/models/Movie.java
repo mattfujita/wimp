@@ -1,5 +1,6 @@
 package com.libertymutual.goforcode.wimp.models;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -72,7 +73,7 @@ public class Movie {
 
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
-	}
+	} 
 
 	public Long getBudget() {
 		return budget;

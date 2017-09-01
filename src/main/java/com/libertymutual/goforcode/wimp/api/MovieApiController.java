@@ -17,8 +17,13 @@ import com.libertymutual.goforcode.wimp.models.Movie;
 import com.libertymutual.goforcode.wimp.services.ActorRepository;
 import com.libertymutual.goforcode.wimp.services.MovieRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 @RestController
 @RequestMapping("/api/movies")
+@Api(description="Use this to get and create movies and add actors to movies.")
 public class MovieApiController {
 	
 	private MovieRepository movieRepo;
@@ -43,6 +48,7 @@ public class MovieApiController {
 	}
 	
 	@GetMapping("{id}")
+	@ApiOperation(value="Find one movie by Id", notes = "this will find one movie")
 	public Movie getOne(@PathVariable long id) throws StuffNotFoundException {
 		Movie movie = movieRepo.findOne(id);
 		if(movie == null) {
@@ -57,8 +63,8 @@ public class MovieApiController {
 	}
 	
 	@PostMapping("{movieId}/actors")
+	@ApiOperation(value="Adds an actor to a movie", notes = "This will add an actor to a movie.")
 	public Movie associateAnActor(@RequestBody Actor actor, @PathVariable long movieId) {
-		
 		Movie movie = movieRepo.findOne(movieId);
 		actor = actorRepo.findOne(actor.getId());
 		
